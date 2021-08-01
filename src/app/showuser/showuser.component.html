@@ -1,0 +1,102 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">ROLL NO</th>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">DOB</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">EMAIL</th>
+            <th colspan="2">OPERATIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of data ;index as i">
+            <td>{{i+1}}</td>
+            <td>{{d['f_name']}}</td>
+            <td>{{d['l_name']}}</td>
+            <td>{{d['dob']| date:'shortDate'}}</td>
+            <td>{{d['gender']}}</td>
+            <td>{{d['email']}}</td>
+            <td><button mat-icon-button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <mat-icon color="primary">edit</mat-icon>
+              </button></td>
+            <td><button mat-icon-button>
+                <mat-icon color="warn" (click)="deleteuser(d['id'])">delete</mat-icon>
+              </button></td>
+
+
+            <!--modal-->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="example-form" method="POST">
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="First Name" name="f_name" id="f_name" value="{{d['id']+d['f_name']}}" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Last Name" id="lname" name="l_name" id="l_name" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [matDatepicker]="picker" name="dob" id="dob" placeholder="Date Of Birth" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-radio-group aria-label="Select an option" name="gender" id="gender">
+                                        <mat-radio-button value="male" required>Male</mat-radio-button> &nbsp;&nbsp;
+                                        <mat-radio-button value="female">Female</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email" name="email" id="email" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- <div class="form-group">
+                                                        <mat-form-field class="example-full-width">
+                                                            <input type="password" matInput placeholder="Confirm Password"  id="cpassword" required>
+                                                        </mat-form-field>
+                                                    </div> -->
+
+
+                                <br>
+                                <p></p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <button type="reset" mat-raised-button color="warn" data-bs-dismiss="modal">Cancel</button> &nbsp;
+                            <button type="submit" mat-raised-button color="accent">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--close modal-->
+
+
+
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+
+<!-- Modal -->
